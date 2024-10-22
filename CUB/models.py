@@ -3,12 +3,20 @@ from CUB.template_model import MLP, inception_v3, End2EndModel
 
 
 # Independent & Sequential Model
+
+# input is image, output is the concepts?
+
 def ModelXtoC(pretrained, freeze, num_classes, use_aux, n_attributes, expand_dim, three_class):
     return inception_v3(pretrained=pretrained, freeze=freeze, num_classes=num_classes, aux_logits=use_aux,
                         n_attributes=n_attributes, bottleneck=True, expand_dim=expand_dim,
                         three_class=three_class)
 
+
 # Independent Model
+
+## input is the ground truth atrributes, output is the class labels.
+## I can use it to test the performance of a linear classifier on the attributes.
+
 def ModelOracleCtoY(n_class_attr, n_attributes, num_classes, expand_dim):
     # X -> C part is separate, this is only the C -> Y part
     if n_class_attr == 3:
